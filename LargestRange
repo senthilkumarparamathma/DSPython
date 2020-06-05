@@ -1,0 +1,51 @@
+def largestRange(array):
+    nums = {}
+    for i in array:
+        nums[i] = True
+    print(nums)
+    rangeLength = 0
+    resultRange = []
+
+    for item in array:
+        if nums[item] == False:
+            continue
+        currentRangeLength = 1
+        leftIndex = item
+        rightIndex = item
+        nums[item] = False
+
+        j = item - 1
+        while True:
+            if j in nums:
+                currentRangeLength += 1
+                leftIndex = j
+                nums[j] = False
+                j = j - 1
+
+            else:
+                break
+
+        # print("done 1")
+
+        k = item + 1
+        while True:
+            if k in nums:
+                currentRangeLength += 1
+                rightIndex = k
+                nums[k] = False
+                k = k + 1
+            else:
+                break
+
+        if rangeLength < currentRangeLength:
+            # print("---{0}".format(currentRangeLength))
+            rangeLength = currentRangeLength
+            resultRange = [leftIndex, rightIndex]
+
+    print(resultRange)
+    return resultRange
+
+
+largestRange([1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6])
+# Time : O(n)
+# Space : O(n)
